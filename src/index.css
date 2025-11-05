@@ -61,3 +61,12 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+/* Reduce motion for users/devices that prefer it to improve performance */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

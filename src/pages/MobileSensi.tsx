@@ -32,18 +32,30 @@ const MobileSensi = () => {
   }, [searchQuery]);
 
   const generateSensitivity = (phone: Phone) => {
-    // Fixed sensitivity calculation based on DPI
-    // Higher DPI = Lower sensitivity needed for consistent control
-    const baseFactor = 200 / phone.dpi;
-    
-    // Calculate fixed values (no randomization for consistency)
-    const general = Math.round(baseFactor * 85);
-    const redDot = Math.round(general * 0.95);
-    const scope2x = Math.round(general * 0.85);
-    const scope4x = Math.round(general * 0.70);
-    
-    // Fixed fire button size based on DPI ranges
-    let fireButton = 50; // Default
+    // Start at 60+ and adjust deterministically by device age and DPI
+    const currentYear = new Date().getFullYear();
+    const ageYears = Math.max(0, currentYear - phone.releaseYear);
+
+    // Age: older devices tend to benefit from slightly higher sensitivity
+    // Up to ~+12 for very old devices
+    const ageAdjust = Math.min(10, ageYears) * 1.2; // 0 .. 12
+
+    // DPI: higher DPI -> slightly lower sensitivity; lower DPI -> slightly higher
+    // Normalize around 420 DPI; clamp contribution to about +/-12
+    const dpiAdjustRaw = (420 - phone.dpi) / 10; // e.g. 480 -> -6, 360 -> +6
+    const dpiAdjust = Math.max(-12, Math.min(12, dpiAdjustRaw));
+
+    // Combine with base of 60
+    const baseGeneral = 60 + ageAdjust + dpiAdjust;
+    const general = Math.round(Math.max(60, Math.min(200, baseGeneral)));
+
+    // Derive scoped sensitivities from general
+    const redDot = Math.round(Math.max(1, Math.min(200, general * 0.95)));
+    const scope2x = Math.round(Math.max(1, Math.min(200, general * 0.85)));
+    const scope4x = Math.round(Math.max(1, Math.min(200, general * 0.70)));
+
+    // Fire button size by DPI bands (kept simple and stable)
+    let fireButton = 50;
     if (phone.dpi >= 480) {
       fireButton = 52;
     } else if (phone.dpi >= 440) {
@@ -54,12 +66,11 @@ const MobileSensi = () => {
       fireButton = 48;
     }
 
-    // Ensure all values are within valid range
     return {
-      general: Math.min(200, Math.max(1, general)),
-      redDot: Math.min(200, Math.max(1, redDot)),
-      scope2x: Math.min(200, Math.max(1, scope2x)),
-      scope4x: Math.min(200, Math.max(1, scope4x)),
+      general,
+      redDot,
+      scope2x,
+      scope4x,
       fireButton: Math.min(60, Math.max(45, fireButton)),
     };
   };

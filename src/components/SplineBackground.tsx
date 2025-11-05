@@ -21,7 +21,7 @@ const SplineBackground = () => {
   return (
     <div 
       ref={containerRef}
-      className="fixed inset-0 pointer-events-none"
+      className="fixed inset-0 pointer-events-none hidden md:block"
       style={{ 
         zIndex: -1,
         background: 'transparent',
@@ -33,6 +33,7 @@ const SplineBackground = () => {
         src="https://my.spline.design/neonlightorganictunnelloop-6txeXvnCSqLKGtiaftM4SdYu/"
         title="Spline Background"
         allow="autoplay; fullscreen"
+        loading="lazy"
         style={{
           width: '100%',
           height: '100%',

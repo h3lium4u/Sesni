@@ -21,6 +21,12 @@ const App = () => (
       <BrowserRouter>
         {/* Global background persists across route changes */}
         <SplineBackground />
+        {/* UID banner */}
+        <div className="fixed top-0 left-0 right-0 z-20 flex justify-center pointer-events-none">
+          <div className="mt-2 rounded-full bg-black/40 text-white text-xs md:text-sm px-3 py-1 backdrop-blur-md border border-white/10 shadow-gaming">
+            UID: 517202492
+          </div>
+        </div>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/mobile" element={<MobileSensi />} />
