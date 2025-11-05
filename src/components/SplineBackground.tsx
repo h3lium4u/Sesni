@@ -21,7 +21,7 @@ const SplineBackground = () => {
   return (
     <div 
       ref={containerRef}
-      className="fixed inset-0 pointer-events-none hidden md:block"
+      className="fixed inset-0 pointer-events-none"
       style={{ 
         zIndex: -1,
         backgroundImage: 'url(https://freefiremobile-a.akamaihd.net/common/web_event/official2.ff.garena.all/img/20228/63b4b6a53c2aaf2aee801591afadeb88.jpg)',
