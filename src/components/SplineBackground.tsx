@@ -24,25 +24,13 @@ const SplineBackground = () => {
       className="fixed inset-0 pointer-events-none hidden md:block"
       style={{ 
         zIndex: -1,
-        background: 'transparent',
-        overflow: 'hidden',
+        backgroundImage: 'url(https://freefiremobile-a.akamaihd.net/common/web_event/official2.ff.garena.all/img/20228/63b4b6a53c2aaf2aee801591afadeb88.jpg)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
         opacity: 1
       }}
-    >
-      <iframe
-        src="https://my.spline.design/neonlightorganictunnelloop-6txeXvnCSqLKGtiaftM4SdYu/"
-        title="Spline Background"
-        allow="autoplay; fullscreen"
-        loading="lazy"
-        style={{
-          width: '100%',
-          height: '100%',
-          border: 'none',
-          background: 'transparent',
-          display: 'block'
-        }}
-      />
-    </div>
+    />
   );
 };
 
