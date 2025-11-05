@@ -21,13 +21,14 @@ const MobileSensi = () => {
   } | null>(null);
 
   const filteredPhones = useMemo(() => {
-    if (!searchQuery) return phoneDatabase;
-    
-    const query = searchQuery.toLowerCase();
-    return phoneDatabase.filter(phone => 
-      phone.brand.toLowerCase().includes(query) ||
-      phone.model.toLowerCase().includes(query)
-    );
+    const normalized = searchQuery.trim().toLowerCase().replace(/\s+/g, ' ');
+    if (!normalized) return phoneDatabase;
+
+    const tokens = normalized.split(' ');
+    return phoneDatabase.filter((phone) => {
+      const haystack = `${phone.brand} ${phone.model}`.toLowerCase();
+      return tokens.every((t) => haystack.includes(t));
+    });
   }, [searchQuery]);
 
   const generateSensitivity = (phone: Phone) => {
