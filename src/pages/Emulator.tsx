@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { ArrowLeft, Download, ExternalLink } from 'lucide-react';
 
-interface Optimizer {
+interface EmulatorItem {
   id: string;
   name: string;
   description: string;
@@ -15,44 +15,24 @@ interface Optimizer {
 interface Category {
   id: string;
   name: string;
-  image: string;
+  image?: string;
 }
 
-const Optimizers = () => {
+const Emulator = () => {
   const categories: Category[] = [
     {
-      id: 'regedit',
-      name: 'Regedit',
-      image: '/reg.png',
-    },
-    {
-      id: 'optimizers',
-      name: "Exe's",
-      image: '/tweaks.png',
+      id: 'grayscale-helium',
+      name: 'Gray Scale x Helium',
     },
   ];
 
-  const optimizers: Optimizer[] = [
+  const emulators: EmulatorItem[] = [
     {
-      id: 'optimization-reg',
-      name: 'Optimization Reg',
-      description: 'Registry optimization files for enhanced gaming performance',
-      downloadUrl: 'https://drive.google.com/file/d/1-okwIGpHnucwYDPB0Q-hDBY9ZKnwAhdQ/view?usp=sharing',
-      category: 'regedit',
-    },
-    {
-      id: 'blackoutx',
-      name: 'BlackoutX',
-      description: 'Advanced gaming optimizer for enhanced performance',
-      downloadUrl: 'https://drive.google.com/file/d/1KboKzG1-runo2Ns2ME7VA_gJWhNLodG-/view?usp=sharing',
-      category: 'optimizers',
-    },
-    {
-      id: 'quickboost',
-      name: 'QuickBoost',
-      description: 'Quick Boost for Windows 10/11',
-      downloadUrl: 'https://drive.google.com/file/d/1y1QVgmiMG_2L08Lm4JF8sFiXxerIcK-t/view?usp=sharing',
-      category: 'optimizers',
+      id: 'grayscale-helium',
+      name: 'Gray Scale x Helium',
+      description: 'Premium emulator configuration for optimal Free Fire performance',
+      downloadUrl: 'https://drive.google.com/file/d/1iwMHUs0AxMlr6WBNtZeX68BgGgKzG_iO/view?usp=sharing',
+      category: 'grayscale-helium',
     },
   ];
 
@@ -60,8 +40,8 @@ const Optimizers = () => {
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
-  const getOptimizersByCategory = (categoryId: string) => {
-    return optimizers.filter((opt) => opt.category === categoryId);
+  const getEmulatorsByCategory = (categoryId: string) => {
+    return emulators.filter((item) => item.category === categoryId);
   };
 
   return (
@@ -77,57 +57,58 @@ const Optimizers = () => {
 
           <Card className="p-8 bg-card/40 backdrop-blur-xl border-border mb-6 animate-fade-in">
             <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Optimizers
+              Emulator
             </h1>
             <p className="text-muted-foreground mb-6">
-              Download optimizers to enhance your Free Fire gaming experience
+              Download emulator configurations and optimizations for Free Fire
             </p>
 
             {categories.length > 0 ? (
               <div className="space-y-8">
                 {categories.map((category) => {
-                  const categoryOptimizers = getOptimizersByCategory(category.id);
+                  const categoryEmulators = getEmulatorsByCategory(category.id);
 
                   return (
                     <div key={category.id} className="space-y-4">
                       <div className="flex items-center gap-4 mb-4">
-                        <div className="w-12 h-12 rounded-lg bg-background/50 backdrop-blur-sm border border-border flex items-center justify-center overflow-hidden">
-                          <img
-                            src={category.image}
-                            alt={category.name}
-                            className="w-full h-full object-cover"
-                            onError={(e) => {
-                              // Fallback if image doesn't exist
-                              (e.target as HTMLImageElement).style.display = 'none';
-                            }}
-                          />
-                        </div>
+                        {category.image && (
+                          <div className="w-12 h-12 rounded-lg bg-background/50 backdrop-blur-sm border border-border flex items-center justify-center overflow-hidden">
+                            <img
+                              src={category.image}
+                              alt={category.name}
+                              className="w-full h-full object-cover"
+                              onError={(e) => {
+                                (e.target as HTMLImageElement).style.display = 'none';
+                              }}
+                            />
+                          </div>
+                        )}
                         <h2 className="text-2xl font-bold">{category.name}</h2>
                       </div>
 
-                      {categoryOptimizers.length > 0 ? (
+                      {categoryEmulators.length > 0 ? (
                         <div className="grid md:grid-cols-2 gap-4">
-                          {categoryOptimizers.map((optimizer) => (
+                          {categoryEmulators.map((emulator) => (
                             <Card
-                              key={optimizer.id}
+                              key={emulator.id}
                               className="p-6 bg-background/50 backdrop-blur-sm border-border hover:border-primary transition-all duration-200"
                             >
                               <div className="flex flex-col space-y-4">
                                 <div>
                                   <div className="flex items-center justify-between mb-2">
-                                    <h3 className="text-xl font-bold">{optimizer.name}</h3>
-                                    {optimizer.version && (
+                                    <h3 className="text-xl font-bold">{emulator.name}</h3>
+                                    {emulator.version && (
                                       <span className="text-xs text-muted-foreground bg-primary/10 px-2 py-1 rounded">
-                                        v{optimizer.version}
+                                        v{emulator.version}
                                       </span>
                                     )}
                                   </div>
                                   <p className="text-sm text-muted-foreground mt-2">
-                                    {optimizer.description}
+                                    {emulator.description}
                                   </p>
                                 </div>
                                 <Button
-                                  onClick={() => handleDownload(optimizer.downloadUrl)}
+                                  onClick={() => handleDownload(emulator.downloadUrl)}
                                   className="w-full bg-gradient-gaming hover:opacity-90 transition-opacity"
                                 >
                                   <Download className="w-4 h-4 mr-2" />
@@ -150,10 +131,10 @@ const Optimizers = () => {
             ) : (
               <div className="text-center py-12">
                 <p className="text-muted-foreground mb-4">
-                  No optimizers available yet. Check back soon!
+                  No emulators available yet. Check back soon!
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  Optimizers will be added here for download.
+                  Emulator configurations will be added here for download.
                 </p>
               </div>
             )}
@@ -164,4 +145,6 @@ const Optimizers = () => {
   );
 };
 
-export default Optimizers;
+export default Emulator;
+
+

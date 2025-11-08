@@ -10,6 +10,7 @@ import PcSensi from "./pages/PcSensi";
 import About from "./pages/About";
 import PaidSettings from "./pages/PaidSettings";
 import Optimizers from "./pages/Optimizers";
+import Emulator from "./pages/Emulator";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/contact" element={<About />} />
           <Route path="/paid-settings" element={<PaidSettings />} />
           <Route path="/optimizers" element={<Optimizers />} />
+          <Route path="/emulator" element={<Emulator />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Smartphone, Monitor, User, Download } from 'lucide-react';
+import { Smartphone, Monitor, User, Download, Gamepad2 } from 'lucide-react';
 
 const Home = () => {
   return (
@@ -57,6 +57,12 @@ const Home = () => {
             <Button variant="outline" className="gap-2 backdrop-blur-sm">
               <Download className="w-4 h-4" />
               Optimizers
+            </Button>
+          </Link>
+          <Link to="/emulator">
+            <Button variant="outline" className="gap-2 backdrop-blur-sm">
+              <Gamepad2 className="w-4 h-4" />
+              Emulator
             </Button>
           </Link>
           <Link to="/paid-settings">
