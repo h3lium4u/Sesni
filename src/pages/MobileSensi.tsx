@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { LoadingSpinner } from '@/components/ui/loading';
 import { ArrowLeft, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SplineBackground from '@/components/SplineBackground';
@@ -12,6 +13,7 @@ import { toast } from 'sonner';
 const MobileSensi = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedPhone, setSelectedPhone] = useState<Phone | null>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
   const [sensitivity, setSensitivity] = useState<{
     general: number;
     redDot: number;
@@ -75,14 +77,21 @@ const MobileSensi = () => {
     };
   };
 
-  const handleGenerate = () => {
+  const handleGenerate = async () => {
     if (!selectedPhone) {
       toast.error('Please select a phone first');
       return;
     }
 
+    setIsGenerating(true);
+    setSensitivity(null);
+    
+    // Simulate processing time for better UX
+    await new Promise(resolve => setTimeout(resolve, 800));
+    
     const sensi = generateSensitivity(selectedPhone);
     setSensitivity(sensi);
+    setIsGenerating(false);
     toast.success('Sensitivity generated successfully!');
   };
 
@@ -168,9 +177,17 @@ const MobileSensi = () => {
                   
                   <Button 
                     onClick={handleGenerate}
-                    className="w-full bg-gradient-gaming hover:opacity-90"
+                    disabled={isGenerating}
+                    className="w-full bg-gradient-gaming hover:opacity-90 transition-all duration-300"
                   >
-                    Generate Sensitivity
+                    {isGenerating ? (
+                      <>
+                        <LoadingSpinner size="sm" className="mr-2" />
+                        Generating...
+                      </>
+                    ) : (
+                      'Generate Sensitivity'
+                    )}
                   </Button>
                 </Card>
               )}

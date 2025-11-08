@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Smartphone, Monitor, User } from 'lucide-react';
+import { Smartphone, Monitor, User, Download } from 'lucide-react';
 
 const Home = () => {
   return (
@@ -52,7 +52,13 @@ const Home = () => {
           </Link>
         </div>
 
-        <div className="flex gap-4 mt-2">
+        <div className="flex gap-4 mt-2 flex-wrap justify-center">
+          <Link to="/optimizers">
+            <Button variant="outline" className="gap-2 backdrop-blur-sm">
+              <Download className="w-4 h-4" />
+              Optimizers
+            </Button>
+          </Link>
           <Link to="/paid-settings">
             <Button variant="outline" className="gap-2 backdrop-blur-sm">
               Paid Settings

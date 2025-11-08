@@ -49,17 +49,24 @@ const About = () => {
                   </Card>
                 </a>
 
-                <Card className="p-6 bg-gradient-to-r from-blue-500/10 to-indigo-500/10 border-blue-500/20">
-                  <div className="flex items-center justify-center gap-4">
-                    <div className="p-3 rounded-full bg-blue-500/20">
-                      <MessageCircle className="w-8 h-8 text-blue-500" />
+                <a 
+                  href="https://discord.com/users/helium_in_sync" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="group"
+                >
+                  <Card className="p-6 bg-gradient-to-r from-blue-500/10 to-indigo-500/10 border-blue-500/20 hover:border-blue-500/50 transition-all duration-300 hover:shadow-gaming">
+                    <div className="flex items-center justify-center gap-4">
+                      <div className="p-3 rounded-full bg-blue-500/20 group-hover:bg-blue-500/30 transition-colors">
+                        <MessageCircle className="w-8 h-8 text-blue-500" />
+                      </div>
+                      <div className="text-left">
+                        <p className="text-sm text-muted-foreground">Discord</p>
+                        <p className="text-xl font-bold">helium_in_sync</p>
+                      </div>
                     </div>
-                    <div className="text-left">
-                      <p className="text-sm text-muted-foreground">Discord</p>
-                      <p className="text-xl font-bold">helium_in_sync</p>
-                    </div>
-                  </div>
-                </Card>
+                  </Card>
+                </a>
               </div>
 
               <div className="mt-12 pt-8 border-t border-border">
