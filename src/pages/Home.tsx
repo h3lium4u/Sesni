@@ -9,7 +9,7 @@ const Home = () => {
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-end p-6 pb-12 md:pb-16">
         <div className="text-center mb-12 animate-fade-in">
           <h1 className="text-6xl md:text-8xl font-bold mb-4 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-            HELIUM TWEAKZ
+            ALL STAR TWEAKZ
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground">
             DM for paid tweaks/optimization
